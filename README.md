@@ -12,7 +12,7 @@
 -  Una vez esta en la carpeta indicada coloque el siguiente comando **npm install**  este comando le bajara los modulos utilizados que estan definidor en el package.json
 
 > Los modulos necesarios son los siguientes: 
-    ```js
+```js
     "dependencies": {
     "express": "^4.17.1"
     },
@@ -22,7 +22,7 @@
         "supertest": "^6.1.6"
     }
 
-    ```
+```
 
 > Una vez que termine esa descarga ya va a disponer del proyecto descargado y listo para ser usado  en su maquina de manera local.
 
