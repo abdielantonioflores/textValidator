@@ -1,4 +1,4 @@
-> Proyecto que determina si el texto es palindome y te muestra el valor invertido
+> Proyecto que determina si el texto es palindome y te muestra el valor invertido, se utilizo un modulo de mas para manejo de cors en los apis
 
 # Bajar el proyecto
 
@@ -105,4 +105,8 @@ errors["noText"] = { error: "El valor ingresado no fue un texto", statusCode: 40
 errors["textEmpty"] = { error: "No se a ingresado ningun texto valido", statusCode: 401 };
 errors["ApiProblem"] = { error: "Existen problemas de procesos en este API", statusCode: 402 };
 ```
-> En este proyecto  trate de probar una libreria que trato de perfecionar  escrita en js para manejo de api con express js, de esta manera obligo a seguir un estandar para la gestion de las apis de manera legible por los desarrrolladores
+> En este proyecto  trate de probar una libreria que trato de perfecionar  escrita en js para manejo de api con express js, de esta manera obligo a seguir un estandar para la gestion de las apis de manera legible por los desarrrolladores.
+
+
+conclusion:
+     El manejo de apis se puede mejorar aun mas  acepto recomendaciones me ayudarian mucho en mi crecimiento personal y profesional

@@ -1,5 +1,7 @@
 const express = require('express')
+var cors = require('cors')
 const app = express()
+app.use(cors('*'))
 const http = require("http").Server(app);
 const fs = require("fs");
 'use  strict mode'
@@ -324,6 +326,7 @@ function Server(port) {
             responseModel["Error"] = errorObj;
 
             res.status(500).send(responseModel);
+            
         });
 
 
@@ -337,6 +340,9 @@ function Server(port) {
 
             res.status(404).send(responseModel);
         });
+
+
+
 
 
         // Inicializo mi server 
