@@ -288,7 +288,7 @@ function Server(port) {
         if (req.params.type !== undefined) {
             var responseModel = {};
             responseModel = model;
-            res.send(responseModel);
+           return res.send(responseModel);
 
         }
         else {
