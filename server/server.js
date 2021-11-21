@@ -16,9 +16,8 @@ function Server(port) {
     this.dependencies = {};
     this.middlewareBefore = [];
     this.middlewareAfter = [];
-    this.proxyHolder = {};
     this.PATH = "";
-    global.serv = this;
+    global.express = this;
 
     // Mi  metodo api manejara todas las  configuraciones de mis apis siguiendo el estandar definido por el desarrollador, de esta manera   estandariso el manejo y creaciones de mis apis asi seran mas legibles para cada desarrollador.
 

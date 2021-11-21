@@ -66,4 +66,4 @@ class ValidateApiText {
 
 }
 
-serv.dependencies.ValidateApiText = new ValidateApiText();
+express.dependencies.ValidateApiText = new ValidateApiText();
