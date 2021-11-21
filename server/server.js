@@ -4,7 +4,7 @@ const app = express()
 const http = require("http").Server(app);
 const fs = require("fs");
 app.use(cors('*'))
-'use  strict mode'
+
 
 function Server(port) {
     // DEFINO MIS VARIABLES PARA EL USO DE MIS METODOS  
@@ -17,7 +17,7 @@ function Server(port) {
     this.middlewareBefore = [];
     this.middlewareAfter = [];
     this.PATH = "";
-    global.express = this;
+    global.serv = this;
 
     // Mi  metodo api manejara todas las  configuraciones de mis apis siguiendo el estandar definido por el desarrollador, de esta manera   estandariso el manejo y creaciones de mis apis asi seran mas legibles para cada desarrollador.
 
@@ -282,13 +282,11 @@ function Server(port) {
 
     // valida mis apis 
     self.processApiRequest = function (req, res, element, model, next) {
-        // if (serv.forceJSON) {
-        //     req.params.type = "json";
-        // }
+      
         if (req.params.type !== undefined) {
             var responseModel = {};
             responseModel = model;
-           return res.send(responseModel);
+            res.end(JSON.stringify(responseModel));
 
         }
         else {
@@ -322,17 +320,19 @@ function Server(port) {
                 this.processWebApiRequest(element, req, res, "delete");
             });
         });
-
-
-        // Valida la cabezera o  el contenido que tendra mi api de esta manera yo puedo configurar mis salidas en diferentes formatos ya sea xml o json  o text  como lo quiera parametrizar 
+       
+     
+		
+	
+        // Valida la cabezera o  el contenido que tendra mi api de esta manera yo puedo configurar mis salidas en diferentes formatos ya sea xml o json  o text  como lo quiera parametrizar  si n o le agregar el tipo te tratare de retornar un xml aun estoy validando posibles mejoras 
         this.webserver.use((err, req, res, next) => {
             var errorObj = { Code: 500, Message: err.stack };
             res.set("Content-Type", "application/json");
             var responseModel = {};
             responseModel["Error"] = errorObj;
 
-            res.status(500).send(responseModel);
-            next();
+            res.send(responseModel);
+          
         });
 
 
@@ -344,8 +344,8 @@ function Server(port) {
             var responseModel = {};
             responseModel["Error"] = { code: 404, message: "la ruta del API no fue encontrada" };
 
-            res.status(404).send(responseModel);
-            next();
+            res.send(responseModel);
+          
         });
 
 
