@@ -1,10 +1,11 @@
 const express = require('express')
 var cors = require('cors')
 const app = express()
-app.use(cors('*'))
 const http = require("http").Server(app);
 const fs = require("fs");
+app.use(cors('*'))
 'use  strict mode'
+
 function Server(port) {
     // DEFINO MIS VARIABLES PARA EL USO DE MIS METODOS  
     var self = this;
@@ -15,6 +16,7 @@ function Server(port) {
     this.dependencies = {};
     this.middlewareBefore = [];
     this.middlewareAfter = [];
+    this.proxyHolder = {};
     this.PATH = "";
     global.serv = this;
 
@@ -280,12 +282,15 @@ function Server(port) {
 
 
     // valida mis apis 
-    self.processApiRequest = function (req, res, element, model) {
+    self.processApiRequest = function (req, res, element, model, next) {
+        // if (serv.forceJSON) {
+        //     req.params.type = "json";
+        // }
         if (req.params.type !== undefined) {
             var responseModel = {};
             responseModel = model;
+            res.send(responseModel);
 
-            res.json(responseModel);
         }
         else {
             throw new Error("The web api response type is not defined");
@@ -299,14 +304,16 @@ function Server(port) {
         this.PATH = path;
         this.loadDependeciesOfApis();
         this.loadWebApies();
-// console.log(this.webserver.route("/webapi" + path + "/:type"))
 
-        //  console.log( this)
+
+        // console.log(this.webserver.route("/webapi" + path + "/:type"))
+
         // agrega los web apis y los metodos permitidos de cada uno de ellos, de manera si quiero agregar un nuevo metodo puedo hacerzo, de esta menera controlo mis apis
         this.webapis.forEach((element) => {
             const path = element.path;
             this.webserver.route("/webapi" + path + "/:type").get((req, res) => {
                 // console.log(res)
+
                 this.processWebApiRequest(element, req, res, "get");
             }).post((req, res) => {
                 this.processWebApiRequest(element, req, res, "post");
@@ -326,7 +333,7 @@ function Server(port) {
             responseModel["Error"] = errorObj;
 
             res.status(500).send(responseModel);
-            
+            next();
         });
 
 
@@ -339,6 +346,7 @@ function Server(port) {
             responseModel["Error"] = { code: 404, message: "la ruta del API no fue encontrada" };
 
             res.status(404).send(responseModel);
+            next();
         });
 
 
